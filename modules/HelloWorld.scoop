@@ -1,0 +1,42 @@
+
+/* 
+ * PhoneGap is available under *either* the terms of the modified BSD license *or* the
+ * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
+ * 
+ * Copyright (c) 2011, IBM Corporation
+ */
+
+//-------------------------------------------------------------------
+class HelloWorld
+
+//-------------------------------------------------------------------
+init
+    console.log("HellowWorld.init()")
+    var PluginPackage = "org.example.helloworld"
+    var PluginName    = "HelloWorld"
+
+//-------------------------------------------------------------------
+method test(a, b, c)
+    return PhoneGap.exec(
+        this.cbSuccess, 
+        this.cbFailure, 
+        PluginName + "Plugin", "test", 
+        [a,b,c]
+    )
+
+//-------------------------------------------------------------------
+bind method cbSuccess(result)
+    console.log(arguments.callee.signature + ": success: " + result)
+    
+//-------------------------------------------------------------------
+bind method cbFailure(stuff)
+    console.log(arguments.callee.signature + ": failure!")
+    
+//-------------------------------------------------------------------
+function registerPlugin
+    PhoneGap.addPlugin(PluginName, new HelloWorld())
+    PluginManager.addService(PluginName + "Plugin", PluginPackage + "." + PluginName + "Plugin")
+
+//-------------------------------------------------------------------
+static method register
+    PhoneGap.addConstructor(registerPlugin)

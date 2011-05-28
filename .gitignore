@@ -1,0 +1,4 @@
+assets/www/*
+bin/*
+gen/*
+vendor/*
