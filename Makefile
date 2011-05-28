@@ -24,7 +24,8 @@ build: vendor
 	@echo running build
 	@echo ===========================================================
 	
-	@chmod -R +w assets/www
+	@-mkdir assets
+	@-chmod -R +w assets/www
 	@rm -rf assets/www
 	@mkdir assets/www
 	@mkdir assets/www/vendor
